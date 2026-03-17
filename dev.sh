@@ -7,7 +7,7 @@ echo "🐳  Starting database..."
 docker compose -f "$ROOT/docker-compose.yml" up -d
 
 echo "⏳  Waiting for Postgres to be healthy..."
-until docker compose -f "$ROOT/docker-compose.yml" exec -T db pg_isready -U postgres &>/dev/null; do
+until docker compose -f "$ROOT/docker-compose.yml" exec -T postgres pg_isready -U postgres &>/dev/null; do
   sleep 1
 done
 
