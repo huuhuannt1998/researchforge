@@ -279,3 +279,70 @@ export const EXPERIMENT_FIELD_LABELS: Record<
     description: "Potential blockers, failure modes, or uncertainties",
   },
 };
+
+// ---------------------------------------------------------------------------
+// Pipeline / Agent types
+// ---------------------------------------------------------------------------
+
+export type PipelineStage =
+  | "literature"
+  | "design"
+  | "code"
+  | "evaluation"
+  | "writing";
+
+export type PipelineStatus = "pending" | "running" | "completed" | "failed";
+
+export const PIPELINE_STAGES: PipelineStage[] = [
+  "literature",
+  "design",
+  "code",
+  "evaluation",
+  "writing",
+];
+
+export const STAGE_LABELS: Record<PipelineStage, string> = {
+  literature: "Literature Review",
+  design: "Experiment Design",
+  code: "Code Generation",
+  evaluation: "Evaluation",
+  writing: "Paper Writing",
+};
+
+export const STAGE_ICONS: Record<PipelineStage, string> = {
+  literature: "📚",
+  design: "🔬",
+  code: "💻",
+  evaluation: "📊",
+  writing: "✍️",
+};
+
+export const STAGE_DESCRIPTIONS: Record<PipelineStage, string> = {
+  literature: "Search papers, extract key findings, and synthesize a literature review",
+  design: "Propose hypotheses, baselines, datasets, and metrics from the literature",
+  code: "Generate experiment code, execute it, and capture results",
+  evaluation: "Analyze results, compare methods, and validate hypotheses",
+  writing: "Generate all paper sections from research artifacts",
+};
+
+export const PIPELINE_STATUS_COLORS: Record<PipelineStatus, string> = {
+  pending: "bg-gray-100 text-gray-600",
+  running: "bg-blue-100 text-blue-700",
+  completed: "bg-green-100 text-green-700",
+  failed: "bg-red-100 text-red-700",
+};
+
+export interface PipelineRun {
+  id: string;
+  project_id: string;
+  stage: PipelineStage;
+  status: PipelineStatus;
+  logs: string | null;
+  result_summary: string | null;
+  result_data: Record<string, unknown> | null;
+  error_message: string | null;
+  started_at: string | null;
+  completed_at: string | null;
+  created_at: string;
+  updated_at: string;
+}

@@ -41,6 +41,9 @@ class Project(Base):
     review_reports = relationship(
         "ReviewReport", back_populates="project", cascade="all, delete-orphan"
     )
+    pipeline_runs = relationship(
+        "PipelineRun", back_populates="project", cascade="all, delete-orphan"
+    )
 
 
 class ResearchQuestion(Base):

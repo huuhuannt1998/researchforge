@@ -8,6 +8,8 @@ import type {
   LiteratureItem,
   LiteratureItemCreateInput,
   LiteratureItemUpdateInput,
+  PipelineRun,
+  PipelineStage,
   Project,
   ProjectCreateInput,
   ProjectSummary,
@@ -231,5 +233,31 @@ export const api = {
       request<void>(`/api/projects/${projectId}/experiments/${planId}`, {
         method: "DELETE",
       }),
+  },
+
+  pipeline: {
+    list: (projectId: string, stage?: PipelineStage) => {
+      const qs = stage ? `?stage=${stage}` : "";
+      return request<PipelineRun[]>(
+        `/api/projects/${projectId}/pipeline/${qs}`
+      );
+    },
+
+    get: (projectId: string, runId: string) =>
+      request<PipelineRun>(
+        `/api/projects/${projectId}/pipeline/${runId}`
+      ),
+
+    triggerStage: (projectId: string, stage: PipelineStage) =>
+      request<PipelineRun>(
+        `/api/projects/${projectId}/pipeline/${stage}/run`,
+        { method: "POST" }
+      ),
+
+    triggerAll: (projectId: string) =>
+      request<PipelineRun[]>(
+        `/api/projects/${projectId}/pipeline/run-all`,
+        { method: "POST" }
+      ),
   },
 };

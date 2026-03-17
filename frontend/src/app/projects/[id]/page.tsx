@@ -14,11 +14,13 @@ import PageHeader from "@/components/layout/PageHeader";
 import ProjectOverviewTab from "@/components/projects/ProjectOverviewTab";
 import LiteratureTab from "@/components/literature/LiteratureTab";
 import ExperimentPlanTab from "@/components/experiments/ExperimentPlanTab";
+import PipelineTab from "@/components/pipeline/PipelineTab";
 
-type Tab = "overview" | "literature" | "experiments" | "writing" | "review";
+type Tab = "overview" | "pipeline" | "literature" | "experiments" | "writing" | "review";
 
 const TABS: { id: Tab; label: string; soon?: boolean }[] = [
   { id: "overview", label: "Overview" },
+  { id: "pipeline", label: "🤖 AI Pipeline" },
   { id: "literature", label: "Literature" },
   { id: "experiments", label: "Experiments" },
   { id: "writing", label: "Writing", soon: true },
@@ -150,6 +152,11 @@ export default function ProjectDetailPage() {
       {activeTab === "experiments" && (
         <div className="h-[calc(100vh-12rem)]">
           <ExperimentPlanTab projectId={project.id} />
+        </div>
+      )}
+      {activeTab === "pipeline" && (
+        <div className="h-[calc(100vh-12rem)] overflow-y-auto">
+          <PipelineTab projectId={project.id} />
         </div>
       )}
     </div>

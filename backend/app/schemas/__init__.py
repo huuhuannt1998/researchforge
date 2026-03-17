@@ -7,6 +7,7 @@ from app.schemas.literature import (
     LiteratureItemOut,
     LiteratureItemUpdate,
 )
+from app.schemas.pipeline import PipelineRunCreate, PipelineRunOut
 from app.schemas.project import (
     ProjectCreate,
     ProjectOut,
@@ -42,4 +43,6 @@ __all__ = [
     "ReviewReportCreate",
     "ReviewReportOut",
     "ReviewReportUpdate",
+    "PipelineRunCreate",
+    "PipelineRunOut",
 ]
